@@ -34,7 +34,7 @@ public class Player : MonoBehaviour {
         float clampedYPos = Mathf.Clamp(rawNewYPos, -yRange, yRange);
 
         transform.localPosition = new Vector3(clampedXPos, clampedYPos, transform.localPosition.z);
-        print(xOffset);
+        //print(xOffset);
     }
 
     private void ProcessRotation(){
