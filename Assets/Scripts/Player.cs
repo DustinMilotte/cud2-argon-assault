@@ -22,6 +22,10 @@ public class Player : MonoBehaviour {
         ProcessRotation();
     }
 
+    private void OnTriggerEnter(Collider other){
+        print("player triggered " + other);
+    }
+
     private void ProcessTranslation(){
         xThrow = CrossPlatformInputManager.GetAxis("Horizontal");
         float xOffset = playerSpeed * xThrow * Time.deltaTime;
