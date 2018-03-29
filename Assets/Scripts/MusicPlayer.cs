@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MusicPlayer : MonoBehaviour {
-    public AudioSource audioSource;
-    public static MusicPlayer instance;
+    static MusicPlayer instance;
 
     private void Awake() {
-        if(instance == null)
-        {
+        if(instance == null) {
             instance = this;
-        } else
-        {
+        } else {
             Destroy(gameObject);
         }
         DontDestroyOnLoad(this);
