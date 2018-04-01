@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
+    // change A
     [SerializeField] GameObject deathFX;
     [SerializeField] Transform parent;
     Boolean isDead = false;
