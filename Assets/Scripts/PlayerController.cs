@@ -4,10 +4,11 @@ using UnityStandardAssets.CrossPlatformInput;
 public class PlayerController : MonoBehaviour {
     // TODO work out why speed is varying across the scene
 
-    [Header ("General")]
+    [Header("General")]
     [Tooltip("In ms^-1")] [SerializeField] float controlSpeed = 1;
     [Tooltip("In m")] [SerializeField] float xRange = 5f;
     [Tooltip("In m")] [SerializeField] float yRange = 5f;
+    [SerializeField] GameObject[] guns;
 
     [Header("Screen Position Based")]
     [SerializeField] float positionPitchFactor = -5f;
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour {
         if (isControlEnabled){
             ProcessTranslation();
             ProcessRotation();
+            ProcessFiring();
         }
     }
    
@@ -55,5 +57,18 @@ public class PlayerController : MonoBehaviour {
     void OnPlayerDeath(){
         print("stop controls, from collision handler");
         isControlEnabled = false;
+    }
+
+    void ProcessFiring(){
+        if (CrossPlatformInputManager.GetButton("Fire")){
+            foreach(GameObject gun in guns){
+                gun.SetActive(true);
+            }
+        } else {
+            foreach (GameObject gun in guns)
+            {
+                gun.SetActive(false);
+            }
+        }
     }
 }
