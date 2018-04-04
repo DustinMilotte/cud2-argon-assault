@@ -4,14 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
-    // change A
     [SerializeField] GameObject deathFX;
     [SerializeField] Transform parent;
-    Boolean isDead = false;
-
-    [SerializeField] int scorePerHit = 10;
+    [SerializeField] int hits = 10;
+    [SerializeField] int scorePerHit = 5;
 
     ScoreBoard scoreBoard;
+    Boolean isDead = false;
 
     private void Start(){
         BoxCollider collider = gameObject.AddComponent<BoxCollider>();
@@ -20,13 +19,26 @@ public class Enemy : MonoBehaviour {
     }
 
     private void OnParticleCollision(GameObject other){
-        if (!isDead){
-            isDead = true;
-            GameObject fx = Instantiate(deathFX, transform.position, Quaternion.identity);
-            fx.transform.parent = parent;
-            scoreBoard.Scorehit(scorePerHit);
-            Destroy(gameObject);
+        if (!isDead) {
+            ProcessHit();
+            if(hits <= 1) {
+                KillEnemy();
+            }
         }
-       
+
+    }
+
+    private void ProcessHit() {
+        hits--;
+        scoreBoard.Scorehit(scorePerHit);
+        print(hits);
+        // todo consider fx for none death hits
+    }
+
+    private void KillEnemy() {
+        isDead = true;
+        GameObject fx = Instantiate(deathFX, transform.position, Quaternion.identity);
+        fx.transform.parent = parent;
+        Destroy(gameObject);
     }
 }

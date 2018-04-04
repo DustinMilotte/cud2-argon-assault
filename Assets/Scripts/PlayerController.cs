@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour {
     float xThrow, yThrow;
     bool isControlEnabled = true;
 
+    
+
     void Update (){
         if (isControlEnabled){
             ProcessTranslation();
@@ -65,8 +67,7 @@ public class PlayerController : MonoBehaviour {
                 gun.SetActive(true);
             }
         } else {
-            foreach (GameObject gun in guns)
-            {
+            foreach (GameObject gun in guns){
                 gun.SetActive(false);
             }
         }
